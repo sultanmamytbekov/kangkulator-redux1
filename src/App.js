@@ -80,7 +80,7 @@ const savedTasks = JSON.parse(localStorage.getItem("mode"))
  
  
               <button 
-               onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '*'  })} 
+               onClick={() => dispatch({ type : 'ADD_MONEY' ,  payload : balance.length !== 0 ? '*' : ""   })} 
  
               className="block4">*</button>
  
@@ -132,13 +132,13 @@ const savedTasks = JSON.parse(localStorage.getItem("mode"))
                   className="block15">9</button>
  
                  <button 
-                  onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '**'  })} 
+                  onClick={() => dispatch({ type : 'ADD_MONEY' ,  payload : balance.length !== 0 ? '**' : ""   })} 
                   className="block16">**</button><button 
                   onClick={() => dispatch({ type : 'ADD_MONEY' , payload : ''  })} 
                   className="block16">+-</button><button 
                   onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '0'  })} 
                   className="block16">0</button><button 
-                  onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '.'  })} 
+                  onClick={() => dispatch({ type : 'ADD_MONEY' ,  payload : balance.length !== 0 ? '.' : ""   })} 
                   className="block16">.</button>
                          
                   <button  

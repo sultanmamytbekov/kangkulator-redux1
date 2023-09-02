@@ -1,6 +1,5 @@
 // useSelector
  //useDispatch
-
  import './App.css';
  import { useEffect, useState } from "react";
  import { useDispatch, useSelector } from "react-redux";
@@ -17,27 +16,17 @@ const savedTasks = JSON.parse(localStorage.getItem("mode"))
    }) ;
    const dispatch = useDispatch();
  
- 
      useEffect(() => {       
      const local = localStorage.getItem("res");       
      if (local) {      
      dispatch({  type: "ADD_MONEY",payload: local});
      }}, [dispatch]);
-     
-     
+
      useEffect(() => {
      localStorage.setItem("res", balance);
      }, [balance]);
-     
-
-     
-
-
     
-
  const span = [ balance , result]
- 
- 
   return (
      <div style={{background:dark ? 'black' : '#fff' , height:'690px'  , transition:dark ? '1s' : '1s'}} id="App">
       <div style={{position:'absolute'}}><Hero dark={dark} setDark={setDark}/></div>
@@ -49,59 +38,37 @@ const savedTasks = JSON.parse(localStorage.getItem("mode"))
               margin : "17px"
              }}>{balance}</h1>
               </div>
-          
            {/* <div className="btns">
-  
              <button className="btn2" onClick={() => dispatch({ type : 'GET_MONEY' , payload : 10  })} >get money</button>
- 
              <button className="btn1" onClick={() => dispatch({ type : 'ADD_MONEY' , payload : 10 })} >add money</button> 
- 
- 
            </div> */}
            <div className="block-btn">
              <a href="">
                  <button onClick={() => {
-                   localStorage.removeItem('res')
-                 }}
-               
+                   localStorage.removeItem('res')  }}
                  className="block1">C</button>
              </a>
- 
                <button  onClick={() => {
-                   localStorage.removeItem('res')
-                 }}
+                   localStorage.removeItem('res')  }}
                 className="block2" >del</button>
- 
- 
- 
               <button
-              onClick={() => dispatch({ type : 'ADD_MONEY' ,payload : balance.length !== 0 ? '/' : ""  })} 
+              onClick={() => dispatch({ type : 'ADD_MONEY' ,payload : balance.length !== 0 ? '%' : ""  })} 
               className="block3">%</button>
- 
- 
               <button 
                onClick={() => dispatch({ type : 'ADD_MONEY' ,  payload : balance.length !== 0 ? '*' : ""   })} 
- 
               className="block4">*</button>
- 
- 
               <button    
                onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '1'  })} 
                className="block7">1</button>
- 
- 
               <button  
                onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '2'  })} 
                className="block8">2</button>
-                
               <button 
                onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '3'  })} 
                className="block9">3</button>
-               
                <button   
                onClick={() => dispatch({ type : 'ADD_MONEY' , payload : balance.length !== 0 ? '+' : ""  })} 
                className="block6">+</button>
- 
                <button 
                onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '4'  })} 
                className="block10">4</button>

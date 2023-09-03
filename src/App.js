@@ -3,7 +3,7 @@
  import './App.css';
  import { useEffect, useState } from "react";
  import { useDispatch, useSelector } from "react-redux";
-import Hero from './companents/hero';
+import Hero from './companents/Hero';
  
 const savedTasks = JSON.parse(localStorage.getItem("mode"))
  
@@ -15,7 +15,7 @@ const savedTasks = JSON.parse(localStorage.getItem("mode"))
       return state.money ;
    }) ;
    const dispatch = useDispatch();
- 
+    
      useEffect(() => {       
      const local = localStorage.getItem("res");       
      if (local) {      
@@ -28,16 +28,61 @@ const savedTasks = JSON.parse(localStorage.getItem("mode"))
     
  const span = [ balance , result]
   return (
-     <div style={{background:dark ? 'black' : '#fff' , height:'690px'  , transition:dark ? '1s' : '1s'}} id="App">
-      <div style={{position:'absolute'}}><Hero dark={dark} setDark={setDark}/></div>
+     <div style={{background:dark ? 'black' : '' , height:'780px'  , transition:dark ? '1s' : '1s'}} id="App">
+      <div style={{marginBottom:'40px'}}><Hero dark={dark} setDark={setDark}/></div>
        <div className="container">
          <div className="app">
-           <div className="block-text">
-            <h1  style={{
-             color: "black" ,
-              margin : "17px"
-             }}>{balance}</h1>
-              </div>
+           <input
+           onKeyDown={(e) => {
+            if (e.key === '1'){
+              dispatch({ type : 'ADD_MONEY' , payload : '1'  })
+            } else if (e.key === '2'){
+              dispatch({ type : 'ADD_MONEY' , payload : '2'  })
+            }else if (e.key === '3'){
+              dispatch({ type : 'ADD_MONEY' , payload : '3'  })
+            }else if (e.key === '4'){
+              dispatch({ type : 'ADD_MONEY' , payload : '4'  })
+            }else if (e.key === '5'){
+              dispatch({ type : 'ADD_MONEY' , payload : '5'  })
+            }else if (e.key === '6'){
+              dispatch({ type : 'ADD_MONEY' , payload : '6'  })
+            }else if (e.key === '7'){
+              dispatch({ type : 'ADD_MONEY' , payload : '7'  })
+            }else if (e.key === '8'){
+              dispatch({ type : 'ADD_MONEY' , payload : '8'  })
+            }else if (e.key === '9'){
+              dispatch({ type : 'ADD_MONEY' , payload : '9'  })
+            }else if (e.key === '0'){
+              dispatch({ type : 'ADD_MONEY' , payload :  balance.length !== 0 ? '0' : ""  })
+            }else if (e.key === '+'){
+              dispatch({ type : 'ADD_MONEY' , payload :  balance.length !== 0 ? '+' : ""  })
+            }else if (e.key === '-'){
+              dispatch({ type : 'ADD_MONEY' , payload :  balance.length !== 0 ? '-' : ""  })
+            }else if (e.key === '*'){
+              dispatch({ type : 'ADD_MONEY' , payload :  balance.length !== 0 ? '*' : ""  })
+            }else if (e.key === '/'){
+              dispatch({ type : 'ADD_MONEY' , payload :  balance.length !== 0 ? '/' : ""  })
+            }else if (e.key === '.'){
+              dispatch({ type : 'ADD_MONEY' , payload :  balance.length !== 0 ? '.' : ""  })
+            }else if (e.key === '%'){
+              dispatch({ type : 'ADD_MONEY' , payload :  balance.length !== 0 ? '%' : ""  })
+            }else if (e.key === 'Backspace'){
+              // dispatch({ type : 'ADD_MONEY' , payload :  })
+                localStorage.removeItem('res')
+            }else if (e.key === 'Enter'){
+              const result = eval(balance);
+              dispatch({
+              type : 'ADD_MONEY' ,payload : balance.length !== 0 ? '' +  "=" + "" + result : ""  ,
+            });
+            }
+           }}
+             style={{
+            fontSize:'25px',
+            fontFamily:'sans-serif',
+            fontWeight:'400',
+           color: "white" ,
+           outline: "none",
+           }} className='block-text' type="text" value={balance}/>
            {/* <div className="btns">
              <button className="btn2" onClick={() => dispatch({ type : 'GET_MONEY' , payload : 10  })} >get money</button>
              <button className="btn1" onClick={() => dispatch({ type : 'ADD_MONEY' , payload : 10 })} >add money</button> 
@@ -48,16 +93,20 @@ const savedTasks = JSON.parse(localStorage.getItem("mode"))
                    localStorage.removeItem('res')  }}
                  className="block1">C</button>
              </a>
-               <button  onClick={() => {
-                   localStorage.removeItem('res')  }}
-                className="block2" >del</button>
+               <button style={{fontSize:'32px'}}  onClick={() => {
+                   localStorage.removeItem('res')  
+                   dispatch({ type : 'ADD_MONEY' ,payload : balance.length !== 0 ? '**2' : ""  })
+                  }}
+                   
+                className="block2" >x²</button>
               <button
               onClick={() => dispatch({ type : 'ADD_MONEY' ,payload : balance.length !== 0 ? '%' : ""  })} 
               className="block3">%</button>
               <button 
-               onClick={() => dispatch({ type : 'ADD_MONEY' ,  payload : balance.length !== 0 ? '*' : ""   })} 
-              className="block4">*</button>
-              <button    
+               onClick={() => dispatch({ type : 'ADD_MONEY' ,  payload : balance.length !== 0 ? '/' : ""   })} 
+              className="block4">/</button>
+              <button 
+             
                onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '1'  })} 
                className="block7">1</button>
               <button  
@@ -67,8 +116,8 @@ const savedTasks = JSON.parse(localStorage.getItem("mode"))
                onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '3'  })} 
                className="block9">3</button>
                <button   
-               onClick={() => dispatch({ type : 'ADD_MONEY' , payload : balance.length !== 0 ? '+' : ""  })} 
-               className="block6">+</button>
+               onClick={() => dispatch({ type : 'ADD_MONEY' , payload : balance.length !== 0 ? '*' : ""  })} 
+               className="block6">*</button>
                <button 
                onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '4'  })} 
                className="block10">4</button>
@@ -99,12 +148,12 @@ const savedTasks = JSON.parse(localStorage.getItem("mode"))
                   className="block15">9</button>
  
                  <button 
-                  onClick={() => dispatch({ type : 'ADD_MONEY' ,  payload : balance.length !== 0 ? '**' : ""   })} 
-                  className="block16">**</button><button 
-                  onClick={() => dispatch({ type : 'ADD_MONEY' , payload : ''  })} 
-                  className="block16">+-</button><button 
-                  onClick={() => dispatch({ type : 'ADD_MONEY' , payload : '0'  })} 
+                  onClick={() => dispatch({ type : 'ADD_MONEY' ,  payload : balance.length !== 0 ? '+' : ""   })} 
+                  className="block16">+</button><button 
+                  onClick={() => dispatch({ type : 'ADD_MONEY' , payload :  balance.length !== 0 ? '0' : ""  })} 
                   className="block16">0</button><button 
+                  onClick={() => dispatch({ type : 'ADD_MONEY' , payload :  balance.length !== 0 ? '00' : ""   })} 
+                  className="block16">00</button><button 
                   onClick={() => dispatch({ type : 'ADD_MONEY' ,  payload : balance.length !== 0 ? '.' : ""   })} 
                   className="block16">.</button>
                          
